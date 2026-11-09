@@ -1,0 +1,64 @@
+{
+  "channels": [
+    {
+      "id": "mbc-1",
+      "name": "MBC 1",
+      "category": "ترفيه",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8"
+    },
+    {
+      "id": "mbc-4",
+      "name": "MBC 4",
+      "category": "ترفيه",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8"
+    },
+    {
+      "id": "mbc-iraq",
+      "name": "MBC العراق",
+      "category": "ترفيه",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8"
+    },
+    {
+      "id": "mbc-masr",
+      "name": "MBC مصر",
+      "category": "ترفيه",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/index.m3u8"
+    },
+    {
+      "id": "mbc-drama",
+      "name": "MBC دراما",
+      "category": "مسلسلات",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8"
+    },
+    {
+      "id": "hadath",
+      "name": "الحدث",
+      "category": "أخبار",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8"
+    },
+    {
+      "id": "alarabiya",
+      "name": "العربية",
+      "category": "أخبار",
+      "url": "https://shls-live-enc.edgenextcdn.net/out/v1/f5f319206ed740f9a831f2097c2ead23/index.m3u8"
+    },
+    {
+      "id": "bollywood",
+      "name": "MBC Bollywood",
+      "category": "أفلام",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8"
+    },
+    {
+      "id": "spacetoon",
+      "name": "Spacetoon",
+      "category": "أطفال",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-spacetoon/d8382fb9ab4b2307058f12c7ea90db54/index.m3u8"
+    },
+    {
+      "id": "masr-drama",
+      "name": "MBC مصر دراما",
+      "category": "مسلسلات",
+      "url": "https://shls-live-enc.edgenextcdn.net/out/v1/08eca926a78a41339b8010c882410307/index.m3u8"
+    }
+  ]
+}

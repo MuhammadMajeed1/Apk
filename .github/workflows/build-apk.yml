@@ -1,4 +1,5 @@
 name: Build GT TV APK
+
 on:
   push:
     branches: [main]
@@ -20,7 +21,6 @@ jobs:
           echo "ANDROID_HOME=$ANDROID_HOME" >> "$GITHUB_ENV"
           SDKMANAGER=$(find "$ANDROID_HOME" -type f -name sdkmanager 2>/dev/null | head -1)
           if [ -z "$SDKMANAGER" ]; then
-            mkdir -p "$HOME/android-sdk/cmdline-tools/latest"
             curl -fsSL https://dl.google.com/android/repository/commandlinetools-linux-13114758_latest.zip -o /tmp/sdktools.zip
             unzip -q /tmp/sdktools.zip -d /tmp/gt-sdk
             mkdir -p "$ANDROID_HOME/cmdline-tools"
@@ -35,17 +35,17 @@ jobs:
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
       - name: Prepare APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk GT-TV-Player.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk GT-TV-Player-v2.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: GT-TV-Player-APK
-          path: GT-TV-Player.apk
-      - name: Publish direct download
+          name: GT-TV-Player-v2-APK
+          path: GT-TV-Player-v2.apk
+      - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view gt-tv-v1 >/dev/null 2>&1; then
-            gh release upload gt-tv-v1 GT-TV-Player.apk --clobber
+          if gh release view gt-tv-v2 >/dev/null 2>&1; then
+            gh release upload gt-tv-v2 GT-TV-Player-v2.apk --clobber
           else
-            gh release create gt-tv-v1 GT-TV-Player.apk --title "GT TV Player v1" --notes "Android TV HLS player: MBC1, MBC4, MBC Drama"
+            gh release create gt-tv-v2 GT-TV-Player-v2.apk --title "GT TV Player v2.0 — Satellite Edition" --notes "10 channels, auto-play MBC 1, remote control, numbered channel list and HLS player improvements."
           fi
