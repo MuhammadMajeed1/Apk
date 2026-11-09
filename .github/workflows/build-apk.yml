@@ -1,0 +1,39 @@
+name: Build GT TV APK
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Android SDK
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+      - name: Build APK
+        run: gradle --no-daemon :app:assembleDebug
+      - name: Prepare APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk GT-TV-Player.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GT-TV-Player-APK
+          path: GT-TV-Player.apk
+      - name: Publish direct download
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view gt-tv-v1 >/dev/null 2>&1; then
+            gh release upload gt-tv-v1 GT-TV-Player.apk --clobber
+          else
+            gh release create gt-tv-v1 GT-TV-Player.apk --title "GT TV Player v1" --notes "Android TV HLS player: MBC1, MBC4, MBC Drama"
+          fi
