@@ -39,13 +39,13 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: GT-TV-Player-v3-APK
-          path: GT-TV-Player-v2.apk
+          path: GT-TV-Player-v3.apk
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           if gh release view gt-tv-v3 >/dev/null 2>&1; then
-            gh release upload gt-tv-v2 GT-TV-Player-v2.apk --clobber
+            gh release upload gt-tv-v3 GT-TV-Player-v3.apk --clobber
           else
-            gh release create gt-tv-v2 GT-TV-Player-v2.apk --title "GT TV Player v3.0 — Satellite Edition" --notes "16 channels, new launcher icon, auto quality, native HLS/DASH ClearKey support and enhanced remote."
+            gh release create gt-tv-v3 GT-TV-Player-v3.apk --title "GT TV Player v3.0 — Satellite Edition" --notes "16 channels, new launcher icon, auto quality, native HLS/DASH ClearKey support and enhanced remote."
           fi
