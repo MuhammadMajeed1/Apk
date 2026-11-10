@@ -203,7 +203,7 @@ public final class MainActivity extends Activity {
         channelIndex=index;playbackFailed=false;cancelNumbers();closeList();
         qualityLimit=0;updateQuality();
         player.setTrackSelectionParameters(player.getTrackSelectionParameters().buildUpon()
-            .clearVideoSizeConstraints().clearVideoBitrateConstraints().build());
+            .clearVideoSizeConstraints().build());
         ChannelCatalog.Channel c=channels.get(index);
         setStatus(String.format(Locale.US,"%03d",index+1)+"  "+c.name,"جارٍ الاتصال بالبث...");
         spinner.setVisibility(View.VISIBLE);
@@ -278,7 +278,7 @@ public final class MainActivity extends Activity {
         if(channelIndex<0)return;
         qualityLimit=0;
         player.setTrackSelectionParameters(player.getTrackSelectionParameters().buildUpon()
-            .clearVideoSizeConstraints().clearVideoBitrateConstraints().build());
+            .clearVideoSizeConstraints().build());
         updateQuality();
         Toast.makeText(this,"الجودة تتكيف تلقائياً مع سرعة الإنترنت",Toast.LENGTH_SHORT).show();
         scheduleInfoDismiss();
