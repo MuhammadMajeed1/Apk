@@ -35,17 +35,17 @@ jobs:
       - name: Build APK
         run: gradle --no-daemon :app:assembleDebug
       - name: Prepare APK
-        run: cp app/build/outputs/apk/debug/app-debug.apk GT-TV-Player-v2.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk GT-TV-Player-v3.apk
       - uses: actions/upload-artifact@v4
         with:
-          name: GT-TV-Player-v2-APK
+          name: GT-TV-Player-v3-APK
           path: GT-TV-Player-v2.apk
       - name: Publish APK release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view gt-tv-v2 >/dev/null 2>&1; then
+          if gh release view gt-tv-v3 >/dev/null 2>&1; then
             gh release upload gt-tv-v2 GT-TV-Player-v2.apk --clobber
           else
-            gh release create gt-tv-v2 GT-TV-Player-v2.apk --title "GT TV Player v2.0 — Satellite Edition" --notes "10 channels, auto-play MBC 1, remote control, numbered channel list and HLS player improvements."
+            gh release create gt-tv-v2 GT-TV-Player-v2.apk --title "GT TV Player v3.0 — Satellite Edition" --notes "16 channels, new launcher icon, auto quality, native HLS/DASH ClearKey support and enhanced remote."
           fi

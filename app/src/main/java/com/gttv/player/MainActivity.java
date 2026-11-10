@@ -3,6 +3,8 @@ package com.gttv.player;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import androidx.media3.datasource.DataSource;
+import androidx.media3.common.VideoSize;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
@@ -48,6 +50,7 @@ public final class MainActivity extends Activity {
     private FrameLayout root;
     private PlayerView video;
     private ExoPlayer player;
+    private DataSource.Factory streamFactory;
     private ProgressBar spinner;
     private LinearLayout sidePanel, infoPanel, infoActions;
     private ScrollView channelScroll;
@@ -166,12 +169,13 @@ public final class MainActivity extends Activity {
     }
     private void buildPlayer(){
         DefaultHttpDataSource.Factory http=new DefaultHttpDataSource.Factory()
-            .setUserAgent("GTTVPlayer/2.0").setAllowCrossProtocolRedirects(true)
+            .setUserAgent("GTTVPlayer/3.0").setAllowCrossProtocolRedirects(true)
             .setConnectTimeoutMs(12000).setReadTimeoutMs(12000);
+        streamFactory=new DefaultDataSource.Factory(this,http);
         DefaultLoadControl buffering=new DefaultLoadControl.Builder()
             .setBufferDurationsMs(7000,26000,1500,2600).build();
         player=new ExoPlayer.Builder(this,new DefaultRenderersFactory(this).setEnableDecoderFallback(true))
-            .setMediaSourceFactory(new DefaultMediaSourceFactory(new DefaultDataSource.Factory(this,http)))
+            .setMediaSourceFactory(new DefaultMediaSourceFactory(streamFactory))
             .setLoadControl(buffering).build();
         video.setPlayer(player);
         player.addListener(new Player.Listener(){
@@ -198,12 +202,25 @@ public final class MainActivity extends Activity {
         if(channelIndex>=0&&channelIndex!=index)previousChannel=channelIndex;
         channelIndex=index;playbackFailed=false;cancelNumbers();closeList();
         qualityLimit=0;updateQuality();
-        player.setTrackSelectionParameters(player.getTrackSelectionParameters().buildUpon().clearVideoSizeConstraints().build());
+        player.setTrackSelectionParameters(player.getTrackSelectionParameters().buildUpon()
+            .clearVideoSizeConstraints().clearVideoBitrateConstraints().build());
         ChannelCatalog.Channel c=channels.get(index);
         setStatus(String.format(Locale.US,"%03d",index+1)+"  "+c.name,"جارٍ الاتصال بالبث...");
         spinner.setVisibility(View.VISIBLE);
-        player.setMediaItem(new MediaItem.Builder().setUri(c.url)
-            .setMimeType(MimeTypes.APPLICATION_M3U8).build());
+        if(c.url.endsWith(".mpd")){
+            try{
+                player.setMediaSource(DrmStreamFactory.create(c,streamFactory));
+            }catch(Exception error){
+                spinner.setVisibility(View.GONE);
+                playbackFailed=true;
+                setStatus(null,"تعذر تجهيز قناة DASH المشفّرة. تأكد من دعم المصدر لنظام ClearKey.");
+                showInfo(true);
+                return;
+            }
+        }else{
+            player.setMediaItem(new MediaItem.Builder().setUri(c.url)
+                .setMimeType(MimeTypes.APPLICATION_M3U8).build());
+        }
         player.prepare();player.play();
         loadingDeadline();announceChannel(c);
         showInfo(false);
@@ -259,16 +276,15 @@ public final class MainActivity extends Activity {
     }
     private void cycleQuality(){
         if(channelIndex<0)return;
-        qualityLimit=(qualityLimit+1)%3;
-        TrackSelectionParameters.Builder p=player.getTrackSelectionParameters().buildUpon();
-        if(qualityLimit==1)p.setMaxVideoSize(854,480);
-        else if(qualityLimit==2)p.setMaxVideoSize(1280,720);
-        else p.clearVideoSizeConstraints();
-        player.setTrackSelectionParameters(p.build());updateQuality();scheduleInfoDismiss();
+        qualityLimit=0;
+        player.setTrackSelectionParameters(player.getTrackSelectionParameters().buildUpon()
+            .clearVideoSizeConstraints().clearVideoBitrateConstraints().build());
+        updateQuality();
+        Toast.makeText(this,"الجودة تتكيف تلقائياً مع سرعة الإنترنت",Toast.LENGTH_SHORT).show();
+        scheduleInfoDismiss();
     }
     private void updateQuality(){
-        qualityButton.setText(qualityLimit==0?"الجودة: تلقائي":
-            qualityLimit==1?"حد الجودة 480p":"حد الجودة 720p");
+        qualityButton.setText("الجودة: تلقائية");
     }
     private void zap(int direction){
         if(channels.isEmpty())return;
@@ -278,10 +294,17 @@ public final class MainActivity extends Activity {
     }
     private void numberKey(int digit){
         if(numberTimeout!=null)handler.removeCallbacks(numberTimeout);
-        if(numberInput.length()>=2)numberInput="";
+        if(numberInput.length()>=3)numberInput="";
         numberInput+=digit;digitsBanner.setText(numberInput);digitsBanner.setVisibility(View.VISIBLE);
-        if(numberInput.length()==2)commitNumber();
-        else {numberTimeout=this::commitNumber;handler.postDelayed(numberTimeout,1450);}
+        int value;
+        try{value=Integer.parseInt(numberInput);}catch(Exception error){value=-1;}
+        if(numberInput.length()==3 ||
+           (numberInput.length()==2 && !numberInput.startsWith("0") && value>=10 && value<=channels.size())){
+            commitNumber();
+        }else{
+            numberTimeout=this::commitNumber;
+            handler.postDelayed(numberTimeout,1350);
+        }
     }
     private void commitNumber(){
         String entry=numberInput;cancelNumbers();

@@ -1,40 +1,19 @@
-# GT TV Player 2.0 — Satellite Edition
+# GT TV Satellite v3.0
 
-Native lightweight Android TV player for a GT television running Android 14 with a Mali-450 GPU.
+Android 14 GT television edition, optimized for remote use with native ExoPlayer (HLS and DASH).
+It automatically starts MBC 1 with adaptive video quality and no browser.
 
-## Channel lineup
+## What changed
+- Simple TV/play icon and TV launcher banner.
+- 16 channels in app/src/main/assets/channels.json (previous MBC Egypt, Al Hadath and Spacetoon retained).
+- User-supplied new MBC stream URLs, four DASH sources with local ClearKey pairs.
+- DASH support uses Android Media3 DRM session management. It works only if the manifest and device support ClearKey; Widevine-only streams may not play.
+- No manually forced 480p/720p: automatic video adaptation is always active.
+- Improved number entry: channels 1..16, or 001..016 with remote number buttons.
+- CH+/CH− and arrows zap, OK opens channel guide, BACK closes.
+- Graceful timeout and manual retry.
+- Version 3 has its own application ID, so it installs next to v2 without uninstalling the working previous release.
 
-001 MBC 1
-002 MBC 4
-003 MBC العراق
-004 MBC مصر
-005 MBC دراما
-006 الحدث
-007 العربية
-008 MBC Bollywood
-009 Spacetoon
-010 MBC مصر دراما
+[Download v3 APK](https://github.com/MuhammadMajeed1/Apk/releases/tag/gt-tv-v3)
 
-The previous 288p MBC Masr Drama URL was replaced by the new supplied MBC Drama and MBC Masr Drama streams. Streams are third-party services and may have geo/copyright restrictions; the player does not circumvent restrictions.
-
-## Television remote behavior
-
-- The app **starts MBC 1 instantly** on every launch.
-- In fullscreen, CH+/CH− or D-pad Up/Down changes channels.
-- OK opens a numbered channel list; Up/Down selects; OK tunes; Back closes.
-- Left opens channel list, Right opens status/player controls.
-- MENU/GUIDE opens list; INFO opens controls.
-- Digits 1–9 directly select their channel; enter **1 then 0** to select channel 10.
-- Info panel offers auto/480p/720p **maximum quality caps**, live reconnect and previous channel.
-- Back closes overlays; press Back twice from fullscreen to exit.
-- 28-second loading timeout with an error banner and manual retry.
-
-Channels can be edited in app/src/main/assets/channels.json without altering the player.
-
-## APK
-
-[GT TV Player v2 release](https://github.com/MuhammadMajeed1/Apk/releases/tag/gt-tv-v2)
-
-This is a GitHub Actions **debug-signed** build. The original v1 is signed using a different ephemeral GitHub runner certificate, so updating in place may fail with a signature mismatch. If so, **uninstall v1** then install v2. Android 14 is supported.
-
-The app is tested for build success using GitHub Actions, not on the physical GT television.
+Please only use streams and decryption keys you are authorized to access. Broadcast availability depends on the upstream provider. The GitHub build verifies compilation but not playback on the physical GT TV.

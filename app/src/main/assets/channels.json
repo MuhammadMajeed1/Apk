@@ -1,37 +1,97 @@
 {
   "channels": [
     {
-      "id": "mbc-1",
+      "id": "mbc1",
       "name": "MBC 1",
-      "category": "ترفيه",
-      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1-na/eec141533c90dd34722c503a296dd0d8/index.m3u8"
+      "category": "عامة",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-1/15cf99af5de54063fdabfefe66adc075/index.m3u8"
     },
     {
-      "id": "mbc-4",
+      "id": "mbc2",
+      "name": "MBC 2",
+      "category": "أفلام",
+      "url": "https://fastlyrwb-live.cdn.intigral-ott.net/bpk-tv/MB2H_HEVC/wv-pr/manifest.mpd",
+      "drm": "clearkey",
+      "keyId": "baa1907a284502eabc320d77051c575c",
+      "key": "58fa20cf6055f3aefc15707992c0b685"
+    },
+    {
+      "id": "mbc3",
+      "name": "MBC 3",
+      "category": "أطفال",
+      "url": "https://fastlyrwb-live.cdn.intigral-ott.net/bpk-tv/MB3_HEVC/wv-pr/manifest.mpd",
+      "drm": "clearkey",
+      "keyId": "ed5ca9f7aafa02e7ba138eff7c021c8f",
+      "key": "f27dae60067ad34b5a921af79a041372"
+    },
+    {
+      "id": "mbc4",
       "name": "MBC 4",
-      "category": "ترفيه",
-      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8"
+      "category": "عامة",
+      "url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-4/24f134f1cd63db9346439e96b86ca6ed/index.m3u8"
     },
     {
       "id": "mbc-iraq",
       "name": "MBC العراق",
-      "category": "ترفيه",
-      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8"
+      "category": "عامة",
+      "url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-iraq/e38c44b1b43474e1c39cb5b90203691e/index.m3u8"
     },
     {
       "id": "mbc-masr",
       "name": "MBC مصر",
-      "category": "ترفيه",
+      "category": "عامة",
       "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr/956eac069c78a35d47245db6cdbb1575/index.m3u8"
     },
     {
+      "id": "mbc-mood",
+      "name": "MBC Mood",
+      "category": "ترفيه",
+      "url": "https://shd-gcp-live.lg.mncdn.com/live/bitmovin-mbc-mood/78367bf48ccdba501d0d014a10c21031/index.m3u8"
+    },
+    {
+      "id": "mbc-bollywood",
+      "name": "MBC Bollywood",
+      "category": "أفلام",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8"
+    },
+    {
       "id": "mbc-drama",
-      "name": "MBC دراما",
+      "name": "MBC Drama",
       "category": "مسلسلات",
       "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-drama/2c28a458e2f3253e678b07ac7d13fe71/index.m3u8"
     },
     {
-      "id": "hadath",
+      "id": "mbc-plus-drama",
+      "name": "MBC Plus Drama",
+      "category": "مسلسلات",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-plus-drama/e37251ec2aac8f6c98f75cd0fa37cd28/index.m3u8"
+    },
+    {
+      "id": "mbc-masr-drama",
+      "name": "MBC مصر دراما",
+      "category": "مسلسلات",
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-masr-drama/567b703c19ede6598222de81b0e4508b/index.m3u8"
+    },
+    {
+      "id": "mbc-masr-drama2",
+      "name": "MBC مصر دراما 2",
+      "category": "مسلسلات",
+      "url": "https://fastlyrwb-live.cdn.intigral-ott.net/bpk-tv/MBMS2_HEVC/wv-pr/manifest.mpd",
+      "drm": "clearkey",
+      "keyId": "4da4fec209622c5da04762e8d2d2f1d7",
+      "key": "4495168cf1a99038546b9d042dbe7c97"
+    },
+    {
+      "id": "mbc-action",
+      "name": "MBC Action",
+      "category": "أفلام وأكشن",
+      "url": "https://ev-fast-mpd.starzplayarabia.com/live/eds/MBC_Action_HD/DASH/MBC_Action_HD.mpd",
+      "drm": "clearkey",
+      "keyId": "d889ec7cb5cd8acb44f702726a56ae21",
+      "key": "37be04cfb92f19ecd6074b976c1f3c54"
+    },
+    {
+      "id": "alhadath",
       "name": "الحدث",
       "category": "أخبار",
       "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-hadath/2ff87ec4c2f3ede35295a20637d9f8fd/index.m3u8"
@@ -40,25 +100,13 @@
       "id": "alarabiya",
       "name": "العربية",
       "category": "أخبار",
-      "url": "https://shls-live-enc.edgenextcdn.net/out/v1/f5f319206ed740f9a831f2097c2ead23/index.m3u8"
-    },
-    {
-      "id": "bollywood",
-      "name": "MBC Bollywood",
-      "category": "أفلام",
-      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-mbc-bollywood/546eb40d7dcf9a209255dd2496903764/index.m3u8"
+      "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-alarabiya/7f90de73d777d04f3dada92f90d35c44/index.m3u8"
     },
     {
       "id": "spacetoon",
       "name": "Spacetoon",
       "category": "أطفال",
       "url": "https://shd-gcp-live.edgenextcdn.net/live/bitmovin-spacetoon/d8382fb9ab4b2307058f12c7ea90db54/index.m3u8"
-    },
-    {
-      "id": "masr-drama",
-      "name": "MBC مصر دراما",
-      "category": "مسلسلات",
-      "url": "https://shls-live-enc.edgenextcdn.net/out/v1/08eca926a78a41339b8010c882410307/index.m3u8"
     }
   ]
 }

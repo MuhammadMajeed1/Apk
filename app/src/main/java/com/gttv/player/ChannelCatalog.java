@@ -16,12 +16,18 @@ public final class ChannelCatalog {
         public final String name;
         public final String category;
         public final String url;
+        public final String drm;
+        public final String keyId;
+        public final String key;
 
-        Channel(String id, String name, String category, String url) {
+        Channel(String id, String name, String category, String url, String drm, String keyId, String key) {
             this.id=id;
             this.name=name;
             this.category=category;
             this.url=url;
+            this.drm=drm;
+            this.keyId=keyId;
+            this.key=key;
         }
     }
 
@@ -42,8 +48,11 @@ public final class ChannelCatalog {
                 String name=obj.getString("name").trim();
                 String category=obj.optString("category","قنوات").trim();
                 String url=obj.getString("url").trim();
-                if(!id.isEmpty() && !name.isEmpty() && url.startsWith("https://") && url.contains(".m3u8")) {
-                    channels.add(new Channel(id,name,category,url));
+                String drm=obj.optString("drm", "").trim();
+                String keyId=obj.optString("keyId", "").trim();
+                String key=obj.optString("key", "").trim();
+                if(!id.isEmpty() && !name.isEmpty() && url.startsWith("https://") && (url.contains(".m3u8") || url.contains(".mpd"))) {
+                    channels.add(new Channel(id,name,category,url,drm,keyId,key));
                 }
             }
         }catch(Exception ignored) {}
